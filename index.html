@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div>
+            <div class="main">
+                <div class="inner-con">
+                    <h4>VerifyEmail</h4>
+                    <h1>Verify email to test the accuracy</h1>
+                    <form id="verifyForm" class="verify-input-con">
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required >
+                        <button type="submit" id="verifyBtn" >Verify Email</button>
+                    </form>
+                </div>
+            </div>
+            <div id="limitReached">
+                <div class="result-header" >
+                    <div class="rh-left-con" >
+                        <div class="icon-con icon-con-3" >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
+                        </div>
+                    </div>
+                    <div class="rh-right-con" >
+                        <h3>Limit has been reached!</h3>
+                        <h5>You have used all 20 free requests.</h5>
+                    </div>
+                </div>
+            </div>
+            <div id="validResult">
+                <div class="result-header" >
+                    <div class="rh-left-con" >
+                        <div class="icon-con" >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>
+                        </div>
+                    </div>
+                    <div class="rh-right-con" >
+                        <h3 id="validResultEmail" ></h3>
+                        <h5>This email address can be used safely</h5>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="mb-2" >We couldn't find this email address publically available on the web</h5>
+                <div class="result-body" >
+                    <div class="result-body-con mb-2" >
+                        <div class="result-elem mr-1" >
+                            <div class="mb-1" >
+                                <h4>Format</h4>
+                                <div class="valid" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>This email address has the correct format and is not gibberish.</h5>
+                        </div>
+                        <div class="result-elem" >
+                            <div class="mb-1" >
+                                <h4>Type</h4>
+                                <div class="valid" >
+                                    <h4>Professional</h4>
+                                </div>
+                            </div>
+                            <h5>The domain name isn't used for webmails or for creating temporary email address</h5>
+                        </div>
+                    </div>
+                    <div class="result-body-con" >
+                        <div class="result-elem mr-1" >
+                            <div>
+                                <h4>Server status</h4>
+                                <div class="valid" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>MX records are present for the domain and we can connect to SMTP server these MX records point to.</h5>
+                        </div>
+                        <div class="result-elem" >
+                            <div>
+                                <h4>Email status</h4>
+                                <div class="valid" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>This email address exists and can receive emails.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="invalidResult">
+                <div class="result-header" >
+                    <div class="rh-left-con" >
+                        <div class="icon-con icon-con-2" >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>
+                        </div>
+                    </div>
+                    <div class="rh-right-con" >
+                        <h3 id="validResultEmail">xyzafaq@gmal.com is invalid</h3>
+                        <h5>This email address isn't used to receive emails.</h5>
+                    </div>
+                </div>
+                <hr />
+                <h5 class="mb-2" >We couldn't find this email address publically available on the web</h5>
+                <div class="result-body" >
+                    <div class="result-body-con mb-2" >
+                        <div class="result-elem mr-1" >
+                            <div class="mb-1" >
+                                <h4>Format</h4>
+                                <div class="valid" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>This email address has the correct format and is not gibberish.</h5>
+                        </div>
+                        <div class="result-elem" >
+                            <div class="mb-1" >
+                                <h4>Type</h4>
+                                <div class="valid" >
+                                    <h4>Professional</h4>
+                                </div>
+                            </div>
+                            <h5>The domain name isn't used for webmails or for creating temporary email address</h5>
+                        </div>
+                    </div>
+                    <div class="result-body-con" >
+                        <div class="result-elem mr-1" >
+                            <div>
+                                <h4>Server status</h4>
+                                <div class="valid valid-2" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>MX records are not present for the domain and we can cannot connect to SMTP server.</h5>
+                        </div>
+                        <div class="result-elem" >
+                            <div>
+                                <h4>Email status</h4>
+                                <div class="valid valid-2" >
+                                    <h4>Valid</h4>
+                                </div>
+                            </div>
+                            <h5>This email address can't receive emails.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('verifyForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            document.getElementById('verifyBtn').textContent = 'Verifying...';
+            
+            var email = document.getElementById('email').value;
+            var ip = '111112'; // Replace with code to get user's IP address
+            
+            // Make a request to the API
+            fetch('https://api.nobouncemails.com/webhook/user-side-validation?email=' + encodeURIComponent(email) + '&ip=' + encodeURIComponent(ip))
+            .then(response => response.json())
+            .then(data => {
+                console.log(email)
+                console.log(data)
+                document.getElementById('verifyBtn').textContent = 'Verify Email';
+                    if (data.result === 'api rate limit hit') {
+                        document.getElementById('validResult').style.display = 'none';
+                        document.getElementById('invalidResult').style.display = 'none';
+                        document.getElementById('limitReached').style.display = 'block';
+                        document.getElementById('validResultEmail').textContent = email + ' is invalid';
+                    } else if (data.result === 'valid') {
+                        document.getElementById('limitReached').style.display = 'none';
+                        document.getElementById('invalidResult').style.display = 'none';
+                        document.getElementById('validResult').style.display = 'block';
+                        document.getElementById('validResultEmail').textContent = email + ' is valid';
+                    } else if (data.result === 'invalid') {
+                        document.getElementById('limitReached').style.display = 'none';
+                        document.getElementById('validResult').style.display = 'none';
+                        document.getElementById('invalidResult').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
