@@ -47,50 +47,6 @@
                         <h5>This email address can be used safely</h5>
                     </div>
                 </div>
-                <hr />
-                <h5 class="mb-2" >We couldn't find this email address publically available on the web</h5>
-                <div class="result-body" >
-                    <div class="result-body-con mb-2" >
-                        <div class="result-elem mr-1" >
-                            <div class="mb-1" >
-                                <h4>Format</h4>
-                                <div class="valid" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>This email address has the correct format and is not gibberish.</h5>
-                        </div>
-                        <div class="result-elem" >
-                            <div class="mb-1" >
-                                <h4>Type</h4>
-                                <div class="valid" >
-                                    <h4>Professional</h4>
-                                </div>
-                            </div>
-                            <h5>The domain name isn't used for webmails or for creating temporary email address</h5>
-                        </div>
-                    </div>
-                    <div class="result-body-con" >
-                        <div class="result-elem mr-1" >
-                            <div>
-                                <h4>Server status</h4>
-                                <div class="valid" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>MX records are present for the domain and we can connect to SMTP server these MX records point to.</h5>
-                        </div>
-                        <div class="result-elem" >
-                            <div>
-                                <h4>Email status</h4>
-                                <div class="valid" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>This email address exists and can receive emails.</h5>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div id="invalidResult">
                 <div class="result-header" >
@@ -104,89 +60,56 @@
                         <h5>This email address isn't used to receive emails.</h5>
                     </div>
                 </div>
-                <hr />
-                <h5 class="mb-2" >We couldn't find this email address publically available on the web</h5>
-                <div class="result-body" >
-                    <div class="result-body-con mb-2" >
-                        <div class="result-elem mr-1" >
-                            <div class="mb-1" >
-                                <h4>Format</h4>
-                                <div class="valid" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>This email address has the correct format and is not gibberish.</h5>
-                        </div>
-                        <div class="result-elem" >
-                            <div class="mb-1" >
-                                <h4>Type</h4>
-                                <div class="valid" >
-                                    <h4>Professional</h4>
-                                </div>
-                            </div>
-                            <h5>The domain name isn't used for webmails or for creating temporary email address</h5>
-                        </div>
-                    </div>
-                    <div class="result-body-con" >
-                        <div class="result-elem mr-1" >
-                            <div>
-                                <h4>Server status</h4>
-                                <div class="valid valid-2" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>MX records are not present for the domain and we can cannot connect to SMTP server.</h5>
-                        </div>
-                        <div class="result-elem" >
-                            <div>
-                                <h4>Email status</h4>
-                                <div class="valid valid-2" >
-                                    <h4>Valid</h4>
-                                </div>
-                            </div>
-                            <h5>This email address can't receive emails.</h5>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <script>
-        document.getElementById('verifyForm').addEventListener('submit', function(event) {
+        // Function to fetch user's IP address
+        async function getIpAddress() {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        }
+    
+        // Function to handle form submission
+        document.getElementById('verifyForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent form submission
             document.getElementById('verifyBtn').textContent = 'Verifying...';
             
             var email = document.getElementById('email').value;
-            var ip = '111112'; // Replace with code to get user's IP address
+            var ip = await getIpAddress(); // Get user's IP address
             
-            // Make a request to the API
+            // Make a request to the API with email and IP address
             fetch('https://api.nobouncemails.com/webhook/user-side-validation?email=' + encodeURIComponent(email) + '&ip=' + encodeURIComponent(ip))
             .then(response => response.json())
             .then(data => {
-                console.log(email)
-                console.log(data)
+                console.log(email);
+                console.log(data);
+                console.log(ip);
                 document.getElementById('verifyBtn').textContent = 'Verify Email';
-                    if (data.result === 'api rate limit hit') {
-                        document.getElementById('validResult').style.display = 'none';
-                        document.getElementById('invalidResult').style.display = 'none';
-                        document.getElementById('limitReached').style.display = 'block';
-                        document.getElementById('validResultEmail').textContent = email + ' is invalid';
-                    } else if (data.result === 'valid') {
-                        document.getElementById('limitReached').style.display = 'none';
-                        document.getElementById('invalidResult').style.display = 'none';
-                        document.getElementById('validResult').style.display = 'block';
-                        document.getElementById('validResultEmail').textContent = email + ' is valid';
-                    } else if (data.result === 'invalid') {
-                        document.getElementById('limitReached').style.display = 'none';
-                        document.getElementById('validResult').style.display = 'none';
-                        document.getElementById('invalidResult').style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                
+                if (data.result === 'api rate limit hit') {
+                    document.getElementById('validResult').style.display = 'none';
+                    document.getElementById('invalidResult').style.display = 'none';
+                    document.getElementById('limitReached').style.display = 'block';
+                    document.getElementById('validResultEmail').textContent = email + ' is invalid'; // Line 23
+                } else if (data.result === 'valid') {
+                    document.getElementById('limitReached').style.display = 'none';
+                    document.getElementById('invalidResult').style.display = 'none';
+                    document.getElementById('validResult').style.display = 'block';
+                    document.getElementById('validResultEmail').textContent = email + ' is valid'; // Line 29
+                } else if (data.result === 'invalid') {
+                    document.getElementById('limitReached').style.display = 'none';
+                    document.getElementById('validResult').style.display = 'none';
+                    document.getElementById('invalidResult').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     </script>
+    
 </body>
 </html>
