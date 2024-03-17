@@ -332,9 +332,6 @@
             fetch('https://api.nobouncemails.com/webhook/user-side-validation?email=' + encodeURIComponent(email) + '&ip=' + encodeURIComponent(ip))
             .then(response => response.json())
             .then(data => {
-                console.log(email);
-                console.log(data);
-                console.log(ip);
                 document.getElementById('verifyBtn').textContent = 'Verify Email';
                 
                 if (data.result === 'api rate limit hit') {
